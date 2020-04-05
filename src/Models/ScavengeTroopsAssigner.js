@@ -52,6 +52,9 @@ class ScavengeTroopsAssigner {
         if (this.preferences.mode === ScavengeTroopsAssignerPreferences.MODE_ADDICT) {
             return this.assignTroopsForAddict(usableOptionIds, availableTroopCounts, haulFactor);
         }
+        if (this.preferences.mode === ScavengeTroopsAssignerPreferences.MODE_EFFICIENT) {
+            return this.assignTroopsForEfficientPerson(usableOptionIds, availableTroopCounts, haulFactor);
+        }
         return this.assignTroopsForSanePerson(usableOptionIds, availableTroopCounts, haulFactor);
     }
 
@@ -76,6 +79,39 @@ class ScavengeTroopsAssigner {
             }            
             assignedCountsByOption.set(optionId, assignedCounts);
             availableTroopCounts = availableTroopCounts.subtract(assignedCounts);
+        }
+
+        return assignedCountsByOption;
+    }
+
+    /**
+     * @param {number[]} usableOptionIds 
+     * @param {TroopCounts} availableTroopCounts 
+     * @param {float} haulFactor
+     * @return {Map<number, TroopCounts>}
+     */
+    assignTroopsForEfficientPerson(usableOptionIds, availableTroopCounts, haulFactor = 1.0) {
+        let assignedCountsByOption = new Map();
+        let optionIds = [...this.options.keys()].reverse();
+
+        
+        let targetDurationSeconds = this.preferences.targetDurationSeconds;
+        let numberOfUsableOptions = usableOptionIds.count
+
+        for (let optionId of optionIds) {
+            if (usableOptionIds.includes(optionId)) {
+                let availableCapacity = availableTroopCounts.carryCapacity() * haulFactor;
+                let splitCapacity = availableCapacity / numberOfUsableOptions
+                let option = this.options.get(optionId);
+                let maxCapacity += option.calcTargetCapacity(targetDurationSeconds);
+                let targetCapacity = Math.min(splitCapacity, maxCapacity)
+                assignedCounts = this.chunkTroopsToHaul(targetCapacity, availableTroopCounts, haulFactor);
+            } else {
+                assignedCounts = new TroopCounts();
+            }
+            assignedCountsByOption.set(optionId, assignedCounts);
+            availableTroopCounts = availableTroopCounts.subtract(assignedCounts);
+            numberOfUsableOptions -= 1
         }
 
         return assignedCountsByOption;

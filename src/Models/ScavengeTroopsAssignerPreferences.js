@@ -117,5 +117,6 @@ class ScavengeTroopsAssignerPreferences {
 
 ScavengeTroopsAssignerPreferences.MODE_SANE_PERSON = 'sane_person';
 ScavengeTroopsAssignerPreferences.MODE_ADDICT = 'addict';
+ScavengeTroopsAssignerPreferences.MODE_EFFICIENT = 'split';
 
 export { ScavengeTroopsAssignerPreferences };

@@ -57,9 +57,11 @@ class ScavengePreferencesWidget extends AbstractWidget {
 
         let mode = this.preferences.mode;
         let modeSane = ScavengeTroopsAssignerPreferences.MODE_SANE_PERSON;
-        let modeAddict = ScavengeTroopsAssignerPreferences.MODE_ADDICT;        
+        let modeAddict = ScavengeTroopsAssignerPreferences.MODE_ADDICT;  
+        let modeEfficient = ScavengeTroopsAssignerPreferences.MODE_EFFICIENT;      
         let checkSane = (mode === modeSane) ? 'checked' : '';
         let checkAddict = (mode === modeAddict) ? 'checked' : '';
+        let checkEfficient = (mode === modeEfficient) ? 'checked' : '';
 
         return `
             <table class="vis timing-section">
@@ -69,6 +71,7 @@ class ScavengePreferencesWidget extends AbstractWidget {
                         Target duration:
                         <input type="text" class="target-duration" value="${hours}:${minutes}" placeholder="2:00" required pattern="${durationPattern}">
                         hours:minutes
+                        <br/><span class="hint">(Make sure they are home by 7am)</span>
                     </td>
                 </tr>
                 <tr>
@@ -77,6 +80,15 @@ class ScavengePreferencesWidget extends AbstractWidget {
                             <input type="radio" name="mode" value="${modeSane}" ${checkSane}>
                             Max-out duration of best options first.
                             <br/><span class="hint">(recommended if you'll be afk)</span>
+                        </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>
+                            <input type="radio" name="mode" value="${modeEfficient}" ${checkEfficient}>
+                            Split available troups.
+                            <br/><span class="hint">(Most efficient if active enough)</span>
                         </label>
                     </td>
                 </tr>
