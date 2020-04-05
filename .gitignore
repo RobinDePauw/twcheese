@@ -1,6 +1,6 @@
-#/conf/host
-#/dist/
-#/launch/
-#/node_modules
-#/quickbar/
-#/temp/
+/conf/host
+/dist/
+/launch/
+/node_modules
+/quickbar/
+/temp/
