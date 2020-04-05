@@ -96,22 +96,23 @@ class ScavengeTroopsAssigner {
 
         
         let targetDurationSeconds = this.preferences.targetDurationSeconds;
-        let numberOfUsableOptions = usableOptionIds.count
+        let numberOfUsableOptions = usableOptionIds.count;
 
         for (let optionId of optionIds) {
+            let assignedCounts;
             if (usableOptionIds.includes(optionId)) {
                 let availableCapacity = availableTroopCounts.carryCapacity() * haulFactor;
-                let splitCapacity = availableCapacity / numberOfUsableOptions
+                let splitCapacity = availableCapacity / numberOfUsableOptions;
                 let option = this.options.get(optionId);
                 let maxCapacity += option.calcTargetCapacity(targetDurationSeconds);
-                let targetCapacity = Math.min(splitCapacity, maxCapacity)
+                let targetCapacity = Math.min(splitCapacity, maxCapacity);
                 assignedCounts = this.chunkTroopsToHaul(targetCapacity, availableTroopCounts, haulFactor);
             } else {
                 assignedCounts = new TroopCounts();
             }
             assignedCountsByOption.set(optionId, assignedCounts);
             availableTroopCounts = availableTroopCounts.subtract(assignedCounts);
-            numberOfUsableOptions -= 1
+            numberOfUsableOptions -= 1;
         }
 
         return assignedCountsByOption;
