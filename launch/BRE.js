@@ -47,6 +47,14 @@
  * Want to fix something?
  * https://github.com/cheesasaurus/twcheese
  *---------------------------------------------------------------------*/
+/*!
+ * BRE tool compiled from:
+ *     /src/ToolSetup/BRE.js
+ * Sidebar compiled from:
+ *     src/ToolSetup/Sidebar.js
+ * Vendor libs from:
+ *     vendor/
+ *---------------------------------------------------------------------*/
 (async function() {
     let toolId = 'BRE';
 
@@ -60,8 +68,8 @@
 
 
         window.TwCheese = {
-            ROOT: 'https://cheesasaurus.github.io/twcheese',
-            version: 'v1.9-8-g73f371f',
+            ROOT: 'https://robindepauw.github.io/twcheese',
+            version: 'v1.9-9-gb60aae1',
             tools: {},
             lastToolUsedId: null,
 
@@ -134,15 +142,15 @@
 
         };
 
-        await TwCheese.loadVendorLibs();
-        await TwCheese.loadTool('Sidebar');
+        await TwCheese.loadVendorLibsMinified('a2b0f8e1635207439b95aa79f918de49');
+        await TwCheese.loadToolCompiled('Sidebar', '4032f4d806993a027beda9693d5e496e');
         TwCheese.useTool('Sidebar');
     }
 
     if (TwCheese.hasTool(toolId)) {
         TwCheese.useTool(toolId);
     } else {
-        await TwCheese.loadTool(toolId);
+        await TwCheese.loadToolCompiled(toolId, '869fcdcc6cd6396c940d5eca9906f2af');
         TwCheese.useTool(toolId);
     }
 })();
