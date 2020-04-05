@@ -10,7 +10,8 @@ import { TwCheeseDate } from '/twcheese/src/Models/TwCheeseDate.js';
 function parseArrival(text, market) {    
     switch (market) {
         case 'cz': return parseArrivalCzech(text);
-        case 'pt': return parseArrivalPortuguese(text);        
+        case 'pt': return parseArrivalPortuguese(text);       
+        case 'nl': return parseArrivalNL(text);
     }
     return parseArrivalEnglish(text);
 };
