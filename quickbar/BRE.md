@@ -3,7 +3,7 @@
 ```javascript
 javascript:
 (window.TwCheese && TwCheese.tryUseTool('BRE'))
-|| $.ajax('https://cheesasaurus.github.io/twcheese/launch/BRE.js?'
+|| $.ajax('https://robindepauw.github.io/twcheese/launch/BRE.js?'
 +~~((new Date())/3e5),{cache:1});void 0;
 ```
 
@@ -12,6 +12,6 @@ javascript:
 ```javascript
 javascript:
 (window.TwCheese && TwCheese.tryUseTool('BRE'))
-|| $.getScript('https://cheesasaurus.github.io/twcheese/launch/esm/BRE.js');
+|| $.getScript('https://robindepauw.github.io/twcheese/launch/esm/BRE.js');
 void 0;
 ```

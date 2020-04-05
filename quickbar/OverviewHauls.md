@@ -3,7 +3,7 @@
 ```javascript
 javascript:
 (window.TwCheese && TwCheese.tryUseTool('OverviewHauls'))
-|| $.ajax('https://cheesasaurus.github.io/twcheese/launch/OverviewHauls.js?'
+|| $.ajax('https://robindepauw.github.io/twcheese/launch/OverviewHauls.js?'
 +~~((new Date())/3e5),{cache:1});void 0;
 ```
 
@@ -12,6 +12,6 @@ javascript:
 ```javascript
 javascript:
 (window.TwCheese && TwCheese.tryUseTool('OverviewHauls'))
-|| $.getScript('https://cheesasaurus.github.io/twcheese/launch/esm/OverviewHauls.js');
+|| $.getScript('https://robindepauw.github.io/twcheese/launch/esm/OverviewHauls.js');
 void 0;
 ```

@@ -41,7 +41,7 @@
 
         window.TwCheese = {
             ROOT: 'https://robindepauw.github.io/twcheese',
-            version: 'v1.9-9-gb60aae1',
+            version: 'v1.9-11-g0666510',
             tools: {},
             lastToolUsedId: null,
 
@@ -2626,6 +2626,7 @@
         
         ScavengeTroopsAssignerPreferences_ScavengeTroopsAssignerPreferences.MODE_SANE_PERSON = 'sane_person';
         ScavengeTroopsAssignerPreferences_ScavengeTroopsAssignerPreferences.MODE_ADDICT = 'addict';
+        ScavengeTroopsAssignerPreferences_ScavengeTroopsAssignerPreferences.MODE_EFFICIENT = 'split';
         
         
         // CONCATENATED MODULE: ./src/Models/ScavengeTroopsAssigner.js
@@ -2683,6 +2684,9 @@
                 if (this.preferences.mode === ScavengeTroopsAssignerPreferences_ScavengeTroopsAssignerPreferences.MODE_ADDICT) {
                     return this.assignTroopsForAddict(usableOptionIds, availableTroopCounts, haulFactor);
                 }
+                if (this.preferences.mode === ScavengeTroopsAssignerPreferences_ScavengeTroopsAssignerPreferences.MODE_EFFICIENT) {
+                    return this.assignTroopsForEfficientPerson(usableOptionIds, availableTroopCounts, haulFactor);
+                }
                 return this.assignTroopsForSanePerson(usableOptionIds, availableTroopCounts, haulFactor);
             }
         
@@ -2707,6 +2711,40 @@
                     }            
                     assignedCountsByOption.set(optionId, assignedCounts);
                     availableTroopCounts = availableTroopCounts.subtract(assignedCounts);
+                }
+        
+                return assignedCountsByOption;
+            }
+        
+            /**
+             * @param {number[]} usableOptionIds 
+             * @param {TroopCounts} availableTroopCounts 
+             * @param {float} haulFactor
+             * @return {Map<number, TroopCounts>}
+             */
+            assignTroopsForEfficientPerson(usableOptionIds, availableTroopCounts, haulFactor = 1.0) {
+                let assignedCountsByOption = new Map();
+                let optionIds = [...this.options.keys()].reverse();
+        
+                
+                let targetDurationSeconds = this.preferences.targetDurationSeconds;
+                let numberOfUsableOptions = usableOptionIds.count;
+        
+                for (let optionId of optionIds) {
+                    let assignedCounts;
+                    if (usableOptionIds.includes(optionId)) {
+                        let availableCapacity = availableTroopCounts.carryCapacity() * haulFactor;
+                        let splitCapacity = availableCapacity / numberOfUsableOptions;
+                        let option = this.options.get(optionId);
+                        let maxCapacity = option.calcTargetCapacity(targetDurationSeconds);
+                        let targetCapacity = Math.min(splitCapacity, maxCapacity);
+                        assignedCounts = this.chunkTroopsToHaul(targetCapacity, availableTroopCounts, haulFactor);
+                    } else {
+                        assignedCounts = new TroopCounts();
+                    }
+                    assignedCountsByOption.set(optionId, assignedCounts);
+                    availableTroopCounts = availableTroopCounts.subtract(assignedCounts);
+                    numberOfUsableOptions -= 1;
                 }
         
                 return assignedCountsByOption;
@@ -2904,9 +2942,11 @@
         
                 let mode = this.preferences.mode;
                 let modeSane = ScavengeTroopsAssignerPreferences_ScavengeTroopsAssignerPreferences.MODE_SANE_PERSON;
-                let modeAddict = ScavengeTroopsAssignerPreferences_ScavengeTroopsAssignerPreferences.MODE_ADDICT;        
+                let modeAddict = ScavengeTroopsAssignerPreferences_ScavengeTroopsAssignerPreferences.MODE_ADDICT;  
+                let modeEfficient = ScavengeTroopsAssignerPreferences_ScavengeTroopsAssignerPreferences.MODE_EFFICIENT;      
                 let checkSane = (mode === modeSane) ? 'checked' : '';
                 let checkAddict = (mode === modeAddict) ? 'checked' : '';
+                let checkEfficient = (mode === modeEfficient) ? 'checked' : '';
         
                 return `
                     <table class="vis timing-section">
@@ -2916,6 +2956,7 @@
                                 Target duration:
                                 <input type="text" class="target-duration" value="${hours}:${minutes}" placeholder="2:00" required pattern="${durationPattern}">
                                 hours:minutes
+                                <br/><span class="hint">(Make sure they are home by 7am)</span>
                             </td>
                         </tr>
                         <tr>
@@ -2924,6 +2965,15 @@
                                     <input type="radio" name="mode" value="${modeSane}" ${checkSane}>
                                     Max-out duration of best options first.
                                     <br/><span class="hint">(recommended if you'll be afk)</span>
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>
+                                    <input type="radio" name="mode" value="${modeEfficient}" ${checkEfficient}>
+                                    Split available troups.
+                                    <br/><span class="hint">(Most efficient if active enough)</span>
                                 </label>
                             </td>
                         </tr>

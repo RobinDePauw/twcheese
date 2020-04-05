@@ -3,7 +3,7 @@
 ```javascript
 javascript:
 (window.TwCheese && TwCheese.tryUseTool('ASS'))
-|| $.ajax('https://cheesasaurus.github.io/twcheese/launch/ASS.js?'
+|| $.ajax('https://robindepauw.github.io/twcheese/launch/ASS.js?'
 +~~((new Date())/3e5),{cache:1});void 0;
 ```
 
@@ -12,6 +12,6 @@ javascript:
 ```javascript
 javascript:
 (window.TwCheese && TwCheese.tryUseTool('ASS'))
-|| $.getScript('https://cheesasaurus.github.io/twcheese/launch/esm/ASS.js');
+|| $.getScript('https://robindepauw.github.io/twcheese/launch/esm/ASS.js');
 void 0;
 ```
