@@ -96,7 +96,7 @@ class ScavengeTroopsAssigner {
 
         
         let targetDurationSeconds = this.preferences.targetDurationSeconds;
-        let numberOfUsableOptions = usableOptionIds.count;
+        let numberOfUsableOptions = usableOptionIds.count();
 
         for (let optionId of optionIds) {
             let assignedCounts;

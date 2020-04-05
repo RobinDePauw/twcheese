@@ -61,7 +61,7 @@
 
         window.TwCheese = {
             ROOT: 'https://robindepauw.github.io/twcheese',
-            version: 'v1.9-11-g0666510',
+            version: 'v1.9-13-gae9b2b7a',
             tools: {},
             lastToolUsedId: null,
 
