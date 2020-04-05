@@ -1360,6 +1360,38 @@ switch (game_data.market) {
         language['report']['deletedPlayer'] = '(eliminado)';
         language['report']['unread'] = '(novo)';
         break;
+     
+     // Netherlands
+     case 'nl':
+        /*==== tribalwars.nl ====*/
+        language['buildings']['main'] = 'Hoofdgebouw';
+        language['buildings']['barracks'] = 'Kazerne';
+        language['buildings']['stable'] = 'Stal';
+        language['buildings']['garage'] = 'Werkplaats';
+        language['buildings']['church'] = 'Kerk';
+        language['buildings']['church_f'] = 'Eerste Kerk';
+        language['buildings']['snob'] = 'Adelshoeve';
+        language['buildings']['smith'] = 'Smederij';
+        language['buildings']['place'] = 'Verzamelplaats';
+        language['buildings']['statue'] = 'Standbeeld';
+        language['buildings']['market'] = 'Markt';
+        language['buildings']['wood'] = 'Houthakkers';
+        language['buildings']['stone'] = 'Leemgroeve';
+        language['buildings']['iron'] = 'Ijzermijn';
+        language['buildings']['farm'] = 'Boerderij';
+        language['buildings']['storage'] = 'Opslagplaats';
+        language['buildings']['hide'] = 'Schuilplaats';
+        language['buildings']['wall'] = 'Muur';
+        language['buildings']['watchtower'] = 'Uitkijktoren';
+
+        language['report']['catDamage'] = 'Schade door katapulten:';
+        language['report']['ramDamage'] = 'Schade door rammen:';
+        language['report']['haul'] = 'Buit:';
+        language['report']['loyalty'] = 'Toestemming:';
+        language['report']['unitsInTransit'] = 'Eenheden buiten het dorp';
+        language['report']['deletedPlayer'] = '(verwijderd)';
+        language['report']['unread'] = '(Nieuw)';
+        break;
 
 }
 
@@ -1416,6 +1448,7 @@ class TextScraper_TextScraper {
 
 
 let textScraper = new TextScraper_TextScraper(language);
+
 
 
 
@@ -3147,7 +3180,8 @@ class StationedTroops {
 function parseArrival(text, market) {    
     switch (market) {
         case 'cz': return parseArrivalCzech(text);
-        case 'pt': return parseArrivalPortuguese(text);        
+        case 'pt': return parseArrivalPortuguese(text);       
+        case 'nl': return parseArrivalNL(text);
     }
     return parseArrivalEnglish(text);
 };
@@ -3175,6 +3209,16 @@ function parseArrivalPortuguese(text) {
     let month = TwCheeseDate_TwCheeseDate.monthNumber(monthName);
     return TwCheeseDate_TwCheeseDate.newServerDate(year, month, day, hours, minutes, seconds, millis || 0);
 }
+
+function parseArrivalNL(text) {
+    // e.g. "05.04.20 09:53:18:100"
+    let expr = /(\d+)\.(\d+)\.(\d+) \((\d+):(\d+):(\d+)\):?(\d+)?/;
+    let [, day, monthNumber, yearShort, hours, minutes, seconds, millis] = text.match(expr);
+    let year = '20' + yearShort;
+    let month = monthNumber
+    return TwCheeseDate_TwCheeseDate.newServerDate(year, month, day, hours, minutes, seconds, millis || 0);
+}
+
 
 
 // CONCATENATED MODULE: ./src/Scrape/res.js

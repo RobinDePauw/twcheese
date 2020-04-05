@@ -25,14 +25,6 @@
  * Want to fix something?
  * https://github.com/cheesasaurus/twcheese
  *---------------------------------------------------------------------*/
-/*!
- * ASS tool compiled from:
- *     /src/ToolSetup/ASS.js
- * Sidebar compiled from:
- *     src/ToolSetup/Sidebar.js
- * Vendor libs from:
- *     vendor/
- *---------------------------------------------------------------------*/
 (async function() {
     let toolId = 'ASS';
 
@@ -47,7 +39,7 @@
 
         window.TwCheese = {
             ROOT: 'https://cheesasaurus.github.io/twcheese',
-            version: 'v1.8-41-ga02b337',
+            version: 'v1.9-8-g73f371f',
             tools: {},
             lastToolUsedId: null,
 
@@ -120,15 +112,15 @@
 
         };
 
-        await TwCheese.loadVendorLibsMinified('a2b0f8e1635207439b95aa79f918de49');
-        await TwCheese.loadToolCompiled('Sidebar', 'b020ae3be1df353f2aefbc1f2662d0cf');
+        await TwCheese.loadVendorLibs();
+        await TwCheese.loadTool('Sidebar');
         TwCheese.useTool('Sidebar');
     }
 
     if (TwCheese.hasTool(toolId)) {
         TwCheese.useTool(toolId);
     } else {
-        await TwCheese.loadToolCompiled(toolId, 'edf88e826f1d77c559ccfac91be036d2');
+        await TwCheese.loadTool(toolId);
         TwCheese.useTool(toolId);
     }
 })();

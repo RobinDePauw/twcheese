@@ -39,7 +39,7 @@
 
         window.TwCheese = {
             ROOT: 'https://cheesasaurus.github.io/twcheese',
-            version: 'v1.8-41-ga02b337',
+            version: 'v1.9-8-g73f371f',
             tools: {},
             lastToolUsedId: null,
 

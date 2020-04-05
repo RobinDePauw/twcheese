@@ -2648,7 +2648,8 @@ async function alertPremiumRequired() {
 function parseArrival(text, market) {    
     switch (market) {
         case 'cz': return parseArrivalCzech(text);
-        case 'pt': return parseArrivalPortuguese(text);        
+        case 'pt': return parseArrivalPortuguese(text);       
+        case 'nl': return parseArrivalNL(text);
     }
     return parseArrivalEnglish(text);
 };
@@ -2676,6 +2677,16 @@ function parseArrivalPortuguese(text) {
     let month = TwCheeseDate_TwCheeseDate.monthNumber(monthName);
     return TwCheeseDate_TwCheeseDate.newServerDate(year, month, day, hours, minutes, seconds, millis || 0);
 }
+
+function parseArrivalNL(text) {
+    // e.g. "05.04.20 09:53:18:100"
+    let expr = /(\d+)\.(\d+)\.(\d+) \((\d+):(\d+):(\d+)\):?(\d+)?/;
+    let [, day, monthNumber, yearShort, hours, minutes, seconds, millis] = text.match(expr);
+    let year = '20' + yearShort;
+    let month = monthNumber
+    return TwCheeseDate_TwCheeseDate.newServerDate(year, month, day, hours, minutes, seconds, millis || 0);
+}
+
 
 
 // CONCATENATED MODULE: ./src/Scrape/res.js
