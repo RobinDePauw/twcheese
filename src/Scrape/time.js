@@ -45,7 +45,7 @@ function parseArrivalNL(text) {
     let expr = /(\d+)\.(\d+)\.(\d+) \((\d+):(\d+):(\d+)\):?(\d+)?/;
     let [, day, monthNumber, yearShort, hours, minutes, seconds, millis] = text.match(expr);
     let year = '20' + yearShort;
-    let month = monthNumber - 1
+    let month = monthNumber
     return TwCheeseDate.newServerDate(year, month, day, hours, minutes, seconds, millis || 0);
 }
 
