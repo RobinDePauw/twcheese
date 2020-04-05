@@ -104,7 +104,7 @@ class ScavengeTroopsAssigner {
                 let availableCapacity = availableTroopCounts.carryCapacity() * haulFactor;
                 let splitCapacity = availableCapacity / numberOfUsableOptions;
                 let option = this.options.get(optionId);
-                let maxCapacity += option.calcTargetCapacity(targetDurationSeconds);
+                let maxCapacity = option.calcTargetCapacity(targetDurationSeconds);
                 let targetCapacity = Math.min(splitCapacity, maxCapacity);
                 assignedCounts = this.chunkTroopsToHaul(targetCapacity, availableTroopCounts, haulFactor);
             } else {
