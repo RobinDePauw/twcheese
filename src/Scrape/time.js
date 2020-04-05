@@ -39,4 +39,13 @@ function parseArrivalPortuguese(text) {
     return TwCheeseDate.newServerDate(year, month, day, hours, minutes, seconds, millis || 0);
 }
 
+function parseArrivalNL(text) {
+    // e.g. "05.04.20 09:53:18:100"
+    let expr = /(\d+)\.(\d+)\.(\d+) \((\d+):(\d+):(\d+)\):?(\d+)?/;
+    let [, day, monthNumber, yearShort, hours, minutes, seconds, millis] = text.match(expr);
+    let year = '20' + yearShort;
+    let month = monthNumber - 1
+    return TwCheeseDate.newServerDate(year, month, day, hours, minutes, seconds, millis || 0);
+}
+
 export { parseArrival };
