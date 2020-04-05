@@ -47,7 +47,7 @@
 
         window.TwCheese = {
             ROOT: 'https://robindepauw.github.io/twcheese',
-            version: 'v1.9-14-ga6873f14',
+            version: 'v1.9-15-ge6554732',
             tools: {},
             lastToolUsedId: null,
 
@@ -128,7 +128,7 @@
     if (TwCheese.hasTool(toolId)) {
         TwCheese.useTool(toolId);
     } else {
-        await TwCheese.loadToolCompiled(toolId, 'd41d36bad645f394595e8d31bfef26fc');
+        await TwCheese.loadToolCompiled(toolId, 'e6fdfa8b2f9e6217d67b0425d0e5aab5');
         TwCheese.useTool(toolId);
     }
 })();

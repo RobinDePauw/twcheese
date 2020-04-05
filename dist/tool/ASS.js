@@ -41,7 +41,7 @@
 
         window.TwCheese = {
             ROOT: 'https://robindepauw.github.io/twcheese',
-            version: 'v1.9-14-ga6873f14',
+            version: 'v1.9-15-ge6554732',
             tools: {},
             lastToolUsedId: null,
 
@@ -2739,12 +2739,13 @@
                         let maxCapacity = option.calcTargetCapacity(targetDurationSeconds);
                         let targetCapacity = Math.min(splitCapacity, maxCapacity);
                         assignedCounts = this.chunkTroopsToHaul(targetCapacity, availableTroopCounts, haulFactor);
+                        numberOfUsableOptions -= 1;
                     } else {
                         assignedCounts = new TroopCounts();
                     }
                     assignedCountsByOption.set(optionId, assignedCounts);
                     availableTroopCounts = availableTroopCounts.subtract(assignedCounts);
-                    numberOfUsableOptions -= 1;
+                    
                 }
         
                 return assignedCountsByOption;
