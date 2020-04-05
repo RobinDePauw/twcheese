@@ -217,6 +217,38 @@ switch (game_data.market) {
         language['report']['deletedPlayer'] = '(eliminado)';
         language['report']['unread'] = '(novo)';
         break;
+     
+     // Netherlands
+     case 'nl':
+        /*==== tribalwars.nl ====*/
+        language['buildings']['main'] = 'Hoofdgebouw';
+        language['buildings']['barracks'] = 'Kazerne';
+        language['buildings']['stable'] = 'Stal';
+        language['buildings']['garage'] = 'Werkplaats';
+        language['buildings']['church'] = 'Kerk';
+        language['buildings']['church_f'] = 'Eerste Kerk';
+        language['buildings']['snob'] = 'Adelshoeve';
+        language['buildings']['smith'] = 'Smederij';
+        language['buildings']['place'] = 'Verzamelplaats';
+        language['buildings']['statue'] = 'Standbeeld';
+        language['buildings']['market'] = 'Markt';
+        language['buildings']['wood'] = 'Houthakkers';
+        language['buildings']['stone'] = 'Leemgroeve';
+        language['buildings']['iron'] = 'Ijzermijn';
+        language['buildings']['farm'] = 'Boerderij';
+        language['buildings']['storage'] = 'Opslagplaats';
+        language['buildings']['hide'] = 'Schuilplaats';
+        language['buildings']['wall'] = 'Muur';
+        language['buildings']['watchtower'] = 'Uitkijktoren';
+
+        language['report']['catDamage'] = 'Schade door katapulten:';
+        language['report']['ramDamage'] = 'Schade door rammen:';
+        language['report']['haul'] = 'Buit:';
+        language['report']['loyalty'] = 'Toestemming:';
+        language['report']['unitsInTransit'] = 'Eenheden buiten het dorp';
+        language['report']['deletedPlayer'] = '(verwijderd)';
+        language['report']['unread'] = '(Nieuw)';
+        break;
 
 }
 
