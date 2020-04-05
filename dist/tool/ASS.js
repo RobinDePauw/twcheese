@@ -41,7 +41,7 @@
 
         window.TwCheese = {
             ROOT: 'https://robindepauw.github.io/twcheese',
-            version: 'v1.9-13-gae9b2b7a',
+            version: 'v1.9-14-ga6873f14',
             tools: {},
             lastToolUsedId: null,
 
@@ -2728,7 +2728,7 @@
         
                 
                 let targetDurationSeconds = this.preferences.targetDurationSeconds;
-                let numberOfUsableOptions = usableOptionIds.count();
+                let numberOfUsableOptions = usableOptionIds.length;
         
                 for (let optionId of optionIds) {
                     let assignedCounts;
